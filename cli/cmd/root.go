@@ -453,7 +453,7 @@ func runFunc(command *cobra.Command, args []string) {
 }
 
 func addLibPath(name string) {
-    content, err := util.RunCommand("pm", "path", "--user", gconfig.User, name)
+    content, err := util.RunCommand("pm", "path", "--user", strconv.Itoa(gconfig.User), name)
     if err != nil {
         panic(err)
     }
