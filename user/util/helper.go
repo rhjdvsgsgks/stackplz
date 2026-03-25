@@ -162,12 +162,13 @@ func Get_PackageInfos() *PackageInfos {
 	lines := strings.TrimSpace(string(content))
 	for _, line := range strings.Split(lines, "\n") {
 		parts := strings.Split(line, " ")
-		value, err := strconv.ParseUint(parts[1], 10, 32)
+		value_str = parts[1]
+		if gconfig.User != 0 {
+			value_str = strconv.Itoa(gconfig.User) + value_str
+		}
+		value, err := strconv.ParseUint(value_str, 10, 32)
 		if err != nil {
 			panic(err)
-		}
-		if gconfig.User != 0 {
-			value += strconv.Itoa(gconfig.User)
 		}
 		pis.items = append(pis.items, PackageInfo{parts[0], uint32(value)})
 	}
