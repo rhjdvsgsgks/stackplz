@@ -149,7 +149,7 @@ func (this *PackageInfos) FindUidByPid(pid uint32) uint32 {
 	return uint32(value)
 }
 
-func Get_PackageInfos(int user) *PackageInfos {
+func Get_PackageInfos(user int) *PackageInfos {
 	// https://zhuanlan.zhihu.com/p/31124919
 	// /data/system/packages.list
 	content, err := ioutil.ReadFile("/data/system/packages.list")
