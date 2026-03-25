@@ -453,7 +453,7 @@ func runFunc(command *cobra.Command, args []string) {
 }
 
 func addLibPath(name string) {
-    content, err := util.RunCommand("pm", "path", name)
+    content, err := util.RunCommand("pm", "path", "--user", strconv.Itoa(gconfig.User), name)
     if err != nil {
         panic(err)
     }
@@ -617,6 +617,7 @@ func init() {
     // 过滤设定
     rootCmd.PersistentFlags().Uint32Var(&gconfig.SdkInt, "sdk-int", 0, "android os sdk int, optional")
     rootCmd.PersistentFlags().StringVarP(&gconfig.Name, "name", "n", "", "must set uid or package name")
+    rootCmd.PersistentFlags().IntVar(&gconfig.User, "user", 0, "android user")
 
     rootCmd.PersistentFlags().StringVarP(&gconfig.Uid, "uid", "u", "", "uid white list")
     rootCmd.PersistentFlags().StringVarP(&gconfig.Pid, "pid", "p", "", "pid white list")
