@@ -67,6 +67,7 @@ type GlobalConfig struct {
     SysCall     string
     NoSysCall   string
     ConfigFiles []string
+    User        int
 }
 
 func NewGlobalConfig() *GlobalConfig {
