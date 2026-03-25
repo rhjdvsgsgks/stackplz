@@ -160,7 +160,7 @@ func Get_PackageInfos(int user) *PackageInfos {
 	lines := strings.TrimSpace(string(content))
 	for _, line := range strings.Split(lines, "\n") {
 		parts := strings.Split(line, " ")
-		string value_str = parts[1]
+		var value_str string = parts[1]
 		if user != 0 {
 			value_str = strconv.Itoa(user) + value_str
 		}
