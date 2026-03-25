@@ -173,7 +173,7 @@ func persistentPreRunEFunc(command *cobra.Command, args []string) error {
     mconfig.Parse_Namelist("TNameBlacklist", gconfig.NoTName)
     mconfig.FullTName = gconfig.FullTName
 
-    pis := util.Get_PackageInfos()
+    pis := util.Get_PackageInfos(gconfig.User)
     // 根据 pid 解析进程架构、获取库文件搜索路径
     for _, process_pid := range mconfig.PidWhitelist {
         process_uid := pis.FindUidByPid(process_pid)
