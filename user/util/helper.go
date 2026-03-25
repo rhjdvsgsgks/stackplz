@@ -12,12 +12,9 @@ import (
 	"strings"
 	"syscall"
 	"time"
-	"stackplz/user/config"
 )
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-var gconfig = config.NewGlobalConfig()
 
 func RandStringBytes(n int) string {
 	rand.Seed(time.Now().UnixNano())
@@ -152,7 +149,7 @@ func (this *PackageInfos) FindUidByPid(pid uint32) uint32 {
 	return uint32(value)
 }
 
-func Get_PackageInfos() *PackageInfos {
+func Get_PackageInfos(int user) *PackageInfos {
 	// https://zhuanlan.zhihu.com/p/31124919
 	// /data/system/packages.list
 	content, err := ioutil.ReadFile("/data/system/packages.list")
@@ -164,8 +161,8 @@ func Get_PackageInfos() *PackageInfos {
 	for _, line := range strings.Split(lines, "\n") {
 		parts := strings.Split(line, " ")
 		string value_str = parts[1]
-		if gconfig.User != 0 {
-			value_str = strconv.Itoa(gconfig.User) + value_str
+		if user != 0 {
+			value_str = strconv.Itoa(user) + value_str
 		}
 		value, err := strconv.ParseUint(value_str, 10, 32)
 		if err != nil {
