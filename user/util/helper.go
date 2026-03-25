@@ -16,6 +16,8 @@ import (
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+var gconfig = config.NewGlobalConfig()
+
 func RandStringBytes(n int) string {
 	rand.Seed(time.Now().UnixNano())
 	b := make([]byte, n)
@@ -163,6 +165,9 @@ func Get_PackageInfos() *PackageInfos {
 		value, err := strconv.ParseUint(parts[1], 10, 32)
 		if err != nil {
 			panic(err)
+		}
+		if gconfig.User != 0 {
+			value += strconv.Itoa(gconfig.User)
 		}
 		pis.items = append(pis.items, PackageInfo{parts[0], uint32(value)})
 	}
